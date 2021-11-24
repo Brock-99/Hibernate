@@ -1,17 +1,29 @@
 package lk.ijse.hibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lk.ijse.hibernate.embeded.Name;
 
-@Entity(name = "customer_details")
+import javax.persistence.*;
+
+/**
+ * @author DanujaV
+ * @created 03/11/2021 - 9:50 AM
+ */
+//@Entity
+@Entity(name = "customer_detail")
 public class Customer {
     @Id
     String id;
-    String name;
+   @Column(name = "cust_name")
+           @Embedded
+   Name name;    // fName = danuja mName = vimukthi lname = deshan
     String address;
+    @Transient
     double salary;
 
-    public Customer(String id, String name, String address, double salary) {
+    public Customer() {
+    }
+
+    public Customer(String id, Name name, String address, double salary) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -26,11 +38,11 @@ public class Customer {
         this.id = id;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
@@ -48,9 +60,6 @@ public class Customer {
 
     public void setSalary(double salary) {
         this.salary = salary;
-    }
-
-    public Customer() {
     }
 
     @Override
